@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import Card from "./Card";
+import Form from "./Form";
+import Modal from "./Modal";
+
+import { useState } from "react";
 
 function App() {
+  const [data, setData] = useState(null);
+
+  const dataHandler = function (value) {
+    setData(value);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Card>
+      <Form onGetData={dataHandler} />
+      {data && <Modal data={data} />}
+    </Card>
   );
 }
 

@@ -1,0 +1,19 @@
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #f39c12;
+}
+
+.card {
+  width: 80%;
+  height: 80%;
+  max-width: 600px; /* Limit the max width to 600px for larger screens */
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--primary-color);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
