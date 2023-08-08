@@ -6,15 +6,19 @@ import styles from "./Inputs.module.css";
 import classes from "./Button.module.css";
 
 const intialState = {
-  rate: "",
-  regularHours: "",
+  rate: 20,
+  regularHours: 40,
   overtimeHours: "",
-  holidayHours: "",
+  holidayHours: 0,
 };
 
-export default function Form({ onGetData }) {
+export default function Form({
+  onGetData,
+  showModal,
+  setShowModal,
+  closeModalHandler,
+}) {
   const [data, setData] = useState(intialState);
-  const [showModal, setShowModal] = useState(false);
 
   const inputValueHandler = function (input, value) {
     setData((preValue) => {
@@ -32,7 +36,7 @@ export default function Form({ onGetData }) {
       data.regularHours > 99 ||
       data.overtimeHours < 1 ||
       data.overtimeHours > 99 ||
-      data.holidayHours < 1 ||
+      data.holidayHours < 0 ||
       data.holidayHours > 99
     ) {
       setShowModal((prev) => !prev);
@@ -43,10 +47,6 @@ export default function Form({ onGetData }) {
     onGetData(data);
 
     setData(intialState);
-  };
-
-  const closeModalHandler = function () {
-    setShowModal((prev) => !prev);
   };
 
   return (
@@ -62,6 +62,7 @@ export default function Form({ onGetData }) {
           type="number"
           onChange={(event) => inputValueHandler("rate", event.target.value)}
           value={data.rate}
+          disabled
         />
 
         <label>Regular Hours</label>
@@ -72,6 +73,7 @@ export default function Form({ onGetData }) {
             inputValueHandler("regularHours", event.target.value)
           }
           value={data.regularHours}
+          disabled
         />
 
         <label>Overtime Hours</label>
@@ -92,6 +94,7 @@ export default function Form({ onGetData }) {
             inputValueHandler("holidayHours", event.target.value)
           }
           value={data.holidayHours}
+          disabled
         />
 
         <Button className={classes.btn}>Calculate</Button>
